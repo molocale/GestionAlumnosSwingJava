@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import brain.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
 	// Atributos arquitectura de software:
@@ -24,7 +26,7 @@ public class Login extends JFrame {
 	private JTextField txtUsr;
 
 	public Login() {
-		setTitle("Login MVC");
+		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
@@ -49,6 +51,15 @@ public class Login extends JFrame {
 		btnLogin = new JButton("Login");
 		btnLogin.setBounds(183, 176, 89, 23);
 		getContentPane().add(btnLogin);
+
+		JButton btnRegistrarse = new JButton("Registrarse");
+		btnRegistrarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				miControlador.cambiarPantalla(miControlador.getMisVistas(), 0, 1);
+			}
+		});
+		btnRegistrarse.setBounds(335, 11, 89, 23);
+		getContentPane().add(btnRegistrarse);
 
 	}
 

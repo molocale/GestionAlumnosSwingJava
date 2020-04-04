@@ -1,12 +1,23 @@
 package brain;
 
+import java.util.LinkedList;
+
+import javax.swing.JFrame;
+
 import vistas.*;
 
 public class Modelo {
-	private Login miLogin;
+	//Todas las vistas están contenidas en orden en el linkedList
+	private LinkedList<JFrame> misVistas = new LinkedList<JFrame>();
 
-	public void setMiLogin(Login miLogin) {
-		this.miLogin = miLogin;
+	public LinkedList<JFrame> getMisVistas() {
+		return misVistas;
 	}
+
+	public void setMisVistas(LinkedList<JFrame> misVistas) {
+		this.misVistas = misVistas;
+	}
+
+
 
 }
