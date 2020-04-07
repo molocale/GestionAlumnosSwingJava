@@ -26,7 +26,8 @@ public class Login extends JFrame {
 	private JTextField txtUsr;
 
 	public Login() {
-		setTitle("Login");
+	
+		setTitle("Login");		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
@@ -58,7 +59,7 @@ public class Login extends JFrame {
 				miControlador.cambiarPantalla(miControlador.getMisVistas(), 0, 1);
 			}
 		});
-		btnRegistrarse.setBounds(335, 11, 89, 23);
+		btnRegistrarse.setBounds(333, 0, 101, 23);
 		getContentPane().add(btnRegistrarse);
 
 	}
