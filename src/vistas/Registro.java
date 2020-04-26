@@ -35,6 +35,8 @@ public class Registro extends JFrame {
 	private JPasswordField pswContra;
 	private JTextField textTlfn;
 	private JComboBox comboBoxProfesores;
+	
+
 
 	public JComboBox getComboBoxProfesores() {
 		return comboBoxProfesores;
@@ -122,20 +124,22 @@ public class Registro extends JFrame {
 				String[] datosRegistro = { textNombre.getText(), textApellidos.getText(), textDni.getText(),
 						textEmail.getText(), textEdad.getText(), pswContra.getText(), textTlfn.getText(),
 						(String) comboBoxProfesores.getSelectedItem() };
+
+				miControlador.ComprobarRegistro(miControlador, datosRegistro);
 				
-				if(miControlador.ComprobarRegistro(miControlador, datosRegistro)) {
-					try {
-						miModelo.pedirNombresDeProfes();
-						for (int j = 0; j < miModelo.pedirNombresDeProfes().size(); j++) {
-							comboBoxProfesores.addItem(miModelo.pedirNombresDeProfes().get(j));
-						}
-						
-						
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-					miControlador.cambiarPantalla(miControlador.getMisVistas(), 1, 0);
-				}	
+				if(miControlador.adelante()!=1) {
+					textNombre.setText("");
+					textApellidos.setText("");
+					textDni.setText("");
+					textEmail.setText("");
+					textEdad.setText("");
+					pswContra.setText("");
+					textTlfn.setText("");
+				}
+					
+
+					//miControlador.cambiarPantalla(miControlador.getMisVistas(), 1, 0);
+				
 
 			}
 		});
@@ -178,4 +182,5 @@ public class Registro extends JFrame {
 	public void setMiControlador(Controlador miControlador) {
 		this.miControlador = miControlador;
 	}
+
 }

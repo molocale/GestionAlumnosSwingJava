@@ -57,8 +57,15 @@ public class Controlador {
 				&& miControlador.emailIsCorrect(email, miControlador) && miControlador.dniIsCorrect(dni, miControlador)
 				&& miControlador.edadIsCorrect(edad, miControlador)
 				&& miControlador.tlfnIsCorrect(tlfn, miControlador)) {
+			
+			miControlador.isAlumnos(email, prof, miControlador);
 
-			miModelo.añadirUsuario(datosRegistro, miControlador.isAlumnos(email, prof, miControlador), miControlador);
+			
+			
+			if (miModelo.añadirUsuario(datosRegistro, miControlador.isAlumnos(email, prof, miControlador), miControlador)==1) {
+				
+				miControlador.adelante();
+			}
 			return true;
 
 		} else {
@@ -66,6 +73,11 @@ public class Controlador {
 			return false;
 		}
 
+	}
+
+	public int adelante() {
+		return 1;
+		
 	}
 
 	private boolean tlfnIsCorrect(String tlfn, Controlador miControlador) {
@@ -79,17 +91,22 @@ public class Controlador {
 			return false;
 	}
 
-	private boolean isAlumnos(String email, String prof, Controlador miControlador) {
+	private int isAlumnos(String email, String prof, Controlador miControlador) {
 		int posicionDelArroba = email.indexOf("@");
 		String alumno = "@live.u-tad.com";
 		String extensionEmail = email.substring(posicionDelArroba);
 		
 		if (extensionEmail.equals(alumno) && !prof.equals("Soy profesor")) {
-			return true;
+			return 1;
 
-		} else {
-			//miControlador.crearError("no se corresponde la extension", " con la eleccion del profesor");
-			return false;
+		}else if(extensionEmail.equals(alumno) && prof.equals("Soy profesor")) {
+			//miControlador.crearError("Email de alumno, ", "elige un profesor");
+			return 2;
+			
+		}
+		
+		else {
+			return 3;
 		}
 			
 	}
@@ -189,12 +206,16 @@ public class Controlador {
 			return true;
 	}
 
-	private void crearError(String nombreDelCampoErroneo, String errorOcurrido) {
+	 void crearError(String nombreDelCampoErroneo, String errorOcurrido) {
 		// este metodo va a rcibir el dato que está mal rellenado para pasarselo al
 		// JDialog
 		Fail miFail = new Fail(nombreDelCampoErroneo, errorOcurrido);
 		miFail.setVisible(true);
 
+	}
+	
+	public JFrame devolver() {
+		return miModelo.getMisVistas().get(1);
 	}
 
 
